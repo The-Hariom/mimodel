@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Card</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    padding:30px;
+}
+
+.container{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:40px;
+}
+
+/* Left Side Form */
+.form-section{
+    width:40%;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-section h2{
+    margin-bottom:20px;
+}
+
+.form-section input{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.form-section button{
+    width:100%;
+    padding:12px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.form-section button:hover{
+    background:#0056b3;
+}
+
+/* Right Side Card */
+.card{
+    width:450px;
+    height:600px;
+    position:relative;
+    border-radius:15px;
+    overflow:hidden;
+    /* display:none; */
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+
+.bg{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.profile{
+    position:absolute;
+    top:42.6%;
+    left:24.6%;
+    width:225px;
+    height:228px;
+    border-radius:50%;
+    /* border:4px solid green; */
+    object-fit:cover;
+}
+
+.info{
+    /* position:absolute;
+    bottom:20px;
+    left:20px; */
+    
+    color:black;
+}
+
+.info h3{
+    margin-bottom:5px;
+}
+
+.week{
+     position:absolute;
+    bottom:3%;
+    left:30%
+}
+.name{
+     position:absolute;
+    top: 34%;
+    left:49%;
+    transform: translate(-53%, -50%);
+
+
+
+    
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Form -->
+    <div class="form-section">
+        <h2>Create Profile Card</h2>
+
+        <input type="file" id="imageInput" accept="image/*">
+
+        <input type="text" id="nameInput" placeholder="Enter Name">
+
+        <input type="number" id="ageInput" placeholder="Enter week num.">
+
+        <button onclick="createCard()">Create Card</button>
+    </div>
+
+    <!-- Card -->
+    <div class="card" id="card">
+        <img src="mimodel.jpeg" class="bg" alt="Background">
+
+        <img id="profileImg" class="profile" alt="Profile">
+
+        <div class="info">
+            <h3 id="userName" class="name">Name</h3>
+            <p id="userAge" class="week">week num</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function createCard() {
+
+    const file = document.getElementById("imageInput").files[0];
+    const name = document.getElementById("nameInput").value;
+    const age = document.getElementById("ageInput").value;
+
+    // if (!file || !name || !age) {
+    //     alert("Please fill all fields!");
+    //     return;
+    // }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        document.getElementById("profileImg").src = e.target.result;
+        document.getElementById("userName").innerText = name;
+        document.getElementById("userAge").innerText = age;
+        document.getElementById("card").style.display = "block";
+    }
+
+    reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
